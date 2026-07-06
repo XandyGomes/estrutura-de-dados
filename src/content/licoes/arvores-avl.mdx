@@ -1,0 +1,57 @@
+# Árvores AVL
+
+Vimos que uma BST comum pode degenerar em uma lista ligada (O(n)) se os
+valores forem inseridos em uma ordem desfavorável. A **árvore AVL**
+resolve isso: é uma BST que se **auto-balanceia** após cada inserção
+(e remoção), garantindo altura O(log n) sempre.
+
+## Fator de balanceamento
+
+Para cada nó, definimos:
+
+```
+fator = altura(subárvore esquerda) - altura(subárvore direita)
+```
+
+Uma árvore é AVL-balanceada quando o fator de **todo nó** está entre
+**-1 e 1**. Se uma inserção deixa algum nó com fator -2 ou +2, a árvore
+está desbalanceada e precisa de uma **rotação**.
+
+## As quatro rotações
+
+Depois de inserir um valor, subimos da folha até a raiz verificando o
+fator de balanceamento de cada ancestral. No primeiro nó desbalanceado
+encontrado, aplicamos uma das quatro rotações:
+
+- **Esquerda-Esquerda (LL)**: subárvore esquerda pesada, e o filho
+  esquerdo também é esquerda-pesado. Uma **rotação simples à direita**
+  resolve.
+- **Direita-Direita (RR)**: espelho do caso acima. **Rotação simples à
+  esquerda**.
+- **Esquerda-Direita (LR)**: subárvore esquerda pesada, mas o filho
+  esquerdo é direita-pesado. Precisa de **duas rotações**: primeiro à
+  esquerda no filho, depois à direita no nó desbalanceado.
+- **Direita-Esquerda (RL)**: espelho do caso LR. Rotação à direita no
+  filho, depois à esquerda no nó.
+
+Após aplicar a rotação certa, **toda a árvore volta a ficar balanceada**
+com apenas essa única correção, não importa quantos nós ela tenha.
+
+## Por que isso garante O(log n)?
+
+Uma árvore AVL com n nós tem altura no máximo cerca de 1.44 log₂(n). Como
+inserção, busca e remoção dependem da altura da árvore, todas ficam
+garantidamente O(log n), mesmo no pior caso.
+
+## O custo do balanceamento
+
+Cada inserção pode exigir calcular alturas e, ocasionalmente, fazer uma
+rotação. Isso é um pouco mais caro que uma inserção em uma BST comum, mas
+o ganho (altura sempre controlada) vale a pena quando previsibilidade
+importa mais que velocidade bruta de inserção.
+
+## Experimente
+
+Insira valores em sequência crescente (ex: 1, 2, 3) em uma BST comum e
+veja que ela viraria uma lista. Agora faça o mesmo aqui e observe a
+rotação automática mantendo a árvore baixa e balanceada.

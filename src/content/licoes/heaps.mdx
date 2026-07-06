@@ -1,0 +1,67 @@
+# Heaps (Min/Max)
+
+Um **heap** é uma árvore binária **quase completa** (todos os níveis
+cheios, exceto talvez o último, preenchido da esquerda para a direita)
+que satisfaz a **propriedade do heap**:
+
+- **Min-heap**: todo nó é **menor ou igual** aos seus filhos. A raiz é
+  sempre o menor valor.
+- **Max-heap**: todo nó é **maior ou igual** aos seus filhos. A raiz é
+  sempre o maior valor.
+
+Nesta lição usamos min-heap, mas o max-heap é exatamente simétrico.
+
+## Representado como array
+
+A grande sacada do heap é que, por ser uma árvore **quase completa**, ela
+pode ser representada de forma compacta em um **array**, sem precisar de
+ponteiros:
+
+```
+pai(i)      = (i - 1) / 2
+filhoEsq(i) = 2i + 1
+filhoDir(i) = 2i + 2
+```
+
+É por isso que a visualização mostra o heap como árvore, mas por baixo
+dos panos ele é apenas um array.
+
+## Inserção (sift-up)
+
+1. Adicione o novo valor na **última posição** do array.
+2. Compare com o pai. Se o valor for menor que o pai (violando a
+   propriedade do min-heap), troque os dois.
+3. Repita a partir da nova posição até a propriedade ser satisfeita ou
+   chegar à raiz.
+
+Como a árvore tem altura O(log n), inserção é **O(log n)**.
+
+## Extrair o mínimo (sift-down)
+
+1. Guarde o valor da raiz (é o mínimo).
+2. Mova o **último elemento** do array para a raiz.
+3. Compare com os dois filhos. Se algum filho for menor, troque com o
+   **menor** dos dois.
+4. Repita a partir da nova posição até a propriedade ser satisfeita ou
+   chegar a uma folha.
+
+Também **O(log n)**, pelo mesmo motivo.
+
+## Por que não usar um array ordenado?
+
+Manter um array totalmente ordenado exigiria O(n) para inserir no meio.
+O heap troca essa garantia total de ordem por uma garantia mais fraca (só
+entre pai e filho), mas isso é suficiente para responder rapidamente
+"qual é o mínimo?" (O(1), é sempre a raiz) e para inserir/remover em
+O(log n).
+
+## Onde heaps aparecem na prática
+
+- **Fila de prioridade** (priority queue): a estrutura por trás de heaps.
+- **Heap sort**: algoritmo de ordenação O(n log n).
+- **Algoritmo de Dijkstra** (caminho mínimo em grafos) usa uma fila de prioridade baseada em heap.
+
+## Experimente
+
+Insira alguns valores e observe o **sift-up**; depois extraia o mínimo
+algumas vezes e observe o **sift-down** reorganizando a árvore.

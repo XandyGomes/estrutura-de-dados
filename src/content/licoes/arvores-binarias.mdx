@@ -1,0 +1,54 @@
+# Árvores Binárias e BST
+
+Uma **árvore binária de busca** (Binary Search Tree, BST) é uma estrutura
+hierárquica de nós, onde cada nó tem no máximo dois filhos: **esquerdo**
+e **direito**. A propriedade que a torna uma árvore de *busca* é:
+
+> Para todo nó, os valores da subárvore esquerda são **menores**, e os
+> valores da subárvore direita são **maiores**.
+
+Isso permite descartar metade da árvore a cada comparação, de forma
+parecida com a busca binária em arrays.
+
+## Inserção
+
+Para inserir um valor, comparamos com a raiz e decidimos ir para a
+esquerda ou direita, repetindo até encontrar um espaço vazio (um filho
+`null`), onde o novo nó é colocado.
+
+## Busca
+
+Mesma lógica: comparar com o nó atual e decidir o lado, até encontrar o
+valor ou chegar a um filho `null` (valor não existe).
+
+## Remoção: os três casos
+
+Remover um nó é a operação mais delicada:
+
+1. **Nó folha** (sem filhos): remove-se diretamente.
+2. **Nó com um filho**: o filho assume o lugar do nó removido.
+3. **Nó com dois filhos**: copiamos o valor do **sucessor** (o menor
+   valor da subárvore direita) para o nó, e removemos o sucessor de sua
+   posição original (que tem no máximo um filho direito, já que é o
+   menor de sua subárvore).
+
+## Percursos (traversals)
+
+Existem três formas clássicas de visitar todos os nós:
+
+- **Pré-ordem** (raiz, esquerda, direita): útil para copiar a estrutura da árvore.
+- **Em ordem** (esquerda, raiz, direita): em uma BST, isso visita os valores em **ordem crescente**!
+- **Pós-ordem** (esquerda, direita, raiz): útil para deletar a árvore com segurança (filhos antes do pai).
+
+## Complexidade
+
+Em uma árvore **balanceada**, inserção, busca e remoção são O(log n). Mas
+em uma árvore **desbalanceada** (ex: valores inseridos em ordem
+crescente), a árvore degenera em uma lista ligada, e essas operações
+caem para O(n). É exatamente esse problema que as árvores AVL resolvem,
+no próximo tópico.
+
+## Experimente
+
+Insira alguns valores, depois use os três percursos e observe: o percurso
+**em ordem** sempre produz os números em ordem crescente.

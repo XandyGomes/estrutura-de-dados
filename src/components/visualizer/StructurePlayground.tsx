@@ -2,29 +2,34 @@
 
 import { useState } from "react";
 import type { ComponentType } from "react";
-import type { ArrayState, Highlight, OperationDef } from "@/lib/types";
+import type { Highlight, OperationDef } from "@/lib/types";
 import { useVisualizer } from "./useVisualizer";
 import { VisualizerControls } from "./VisualizerControls";
 
-type RendererProps = {
-  state: ArrayState;
+type RendererProps<TState> = {
+  state: TState;
   highlights?: Highlight[];
   pointers?: Record<string, string>;
 };
 
-type Props = {
-  initialState: ArrayState;
-  operations: OperationDef<ArrayState>[];
-  Renderer: ComponentType<RendererProps>;
+type Props<TState> = {
+  initialState: TState;
+  operations: OperationDef<TState>[];
+  Renderer: ComponentType<RendererProps<TState>>;
   legend?: { label: string; color: string }[];
 };
 
-export function StructurePlayground({ initialState, operations, Renderer, legend }: Props) {
+export function StructurePlayground<TState>({
+  initialState,
+  operations,
+  Renderer,
+  legend,
+}: Props<TState>) {
   const [structureState, setStructureState] = useState(initialState);
   const [selectedOpId, setSelectedOpId] = useState(operations[0]?.id);
   const [values, setValues] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
-  const [frames, setFrames] = useState<Parameters<typeof useVisualizer<ArrayState>>[0]>([
+  const [frames, setFrames] = useState<Parameters<typeof useVisualizer<TState>>[0]>([
     { id: 0, state: initialState, narration: "Escolha uma operação e clique em Executar." },
   ]);
 

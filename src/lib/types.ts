@@ -22,6 +22,18 @@ export type ArrayState = {
   items: ArrayItem[];
 };
 
+export type TreeNode = {
+  id: string;
+  value: number;
+  leftId: string | null;
+  rightId: string | null;
+};
+
+export type TreeState = {
+  nodes: Record<string, TreeNode>;
+  rootId: string | null;
+};
+
 export type OperationResult<TState> =
   | { ok: true; frames: FrameSequence<TState>; nextState: TState }
   | { ok: false; error: string };
