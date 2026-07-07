@@ -12,10 +12,10 @@
   --color-primary-hover: #c4922f;
   --color-primary-soft: rgba(217, 164, 65, 0.14);
 
-  --color-surface: #14161b;
-  --color-surface-muted: #1a1d24;
-  --color-border: #262a33;
-  --color-border-strong: #33384433;
+  --color-surface: #17191f;
+  --color-surface-muted: #1d2028;
+  --color-border: #2f333e;
+  --color-border-strong: #454b5c;
 
   /* sombra com matiz quente, não preto puro */
   --shadow-color: 20, 14, 4;
@@ -37,7 +37,8 @@
 
 body {
   background:
-    radial-gradient(ellipse 900px 500px at 15% -10%, var(--color-primary-soft), transparent),
+    radial-gradient(ellipse 1000px 560px at 12% -8%, color-mix(in srgb, var(--color-primary) 22%, transparent), transparent),
+    radial-gradient(ellipse 800px 500px at 92% 18%, color-mix(in srgb, var(--color-highlight-visit) 14%, transparent), transparent),
     var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
@@ -65,24 +66,25 @@ p {
 }
 
 .glass-panel {
-  background: color-mix(in srgb, var(--color-surface) 88%, transparent);
+  background: color-mix(in srgb, var(--color-surface) 94%, transparent);
   backdrop-filter: blur(14px);
   border: 1px solid var(--color-border);
   box-shadow:
-    0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
     0 12px 30px -12px rgba(var(--shadow-color), 0.55);
 }
 
 .glow-on-hover {
-  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease, background-color 220ms ease;
 }
 
 .glow-on-hover:hover {
-  border-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-border));
+  background: color-mix(in srgb, var(--color-surface-muted) 96%, transparent);
+  border-color: color-mix(in srgb, var(--color-primary) 65%, var(--color-border));
   box-shadow:
-    0 0 0 1px color-mix(in srgb, var(--color-primary) 25%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--color-primary) 35%, transparent),
     0 16px 36px -14px rgba(var(--shadow-color), 0.6);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 @media (prefers-reduced-motion: reduce) {
