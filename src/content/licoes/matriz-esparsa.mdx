@@ -1,0 +1,50 @@
+# Matriz Esparsa
+
+Uma **matriz esparsa** (sparse matrix) é uma matriz onde a **grande
+maioria dos valores é zero**. Guardar todos esses zeros explicitamente
+em uma matriz densa comum (`matriz[linha][coluna]`) desperdiça memória.
+
+## O problema com a representação densa
+
+Uma matriz 1000×1000 tem 1 milhão de posições. Se só 500 delas têm
+valores diferentes de zero (0,05% de preenchimento), armazenar a matriz
+inteira é um desperdício enorme: 999.500 zeros guardados à toa.
+
+## A solução: guardar só o que importa
+
+Em vez de guardar todas as posições, guardamos apenas **triplas**
+`(linha, coluna, valor)` para cada elemento **não-zero**:
+
+```
+matriz densa:              representação esparsa:
+0 0 5 0 0                  (0, 2, 5)
+0 0 0 0 8                  (1, 4, 8)
+3 0 0 0 0                  (2, 0, 3)
+0 0 0 9 0                  (3, 3, 9)
+```
+
+A matriz do exemplo tem 20 posições (4×5), mas só 4 são não-zero. A
+representação esparsa guarda 4 triplas em vez de 20 números: economia de
+80% nesse caso, e a economia cresce muito mais em matrizes maiores.
+
+## Quando usar
+
+Matrizes esparsas aparecem em:
+- **Grafos** representados como matriz de adjacência (a maioria dos
+  pares de nós não é conectada diretamente).
+- **Sistemas de equações lineares** em engenharia e ciência de dados.
+- **Processamento de imagens e machine learning**, onde muitas
+  features/pixels são zero.
+
+## Trade-off
+
+Acessar um elemento específico `matriz[i][j]` é O(1) na representação
+densa (cálculo direto de endereço), mas O(k) na esparsa (é preciso
+procurar entre as k triplas guardadas). A matriz esparsa troca
+velocidade de acesso por economia de memória — vale a pena quando a
+esparsidade é alta o suficiente.
+
+## Experimente
+
+Rode "Gerar representação esparsa" e observe o algoritmo percorrendo
+célula por célula, adicionando à lista só as que não são zero.

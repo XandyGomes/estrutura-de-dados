@@ -1,0 +1,61 @@
+# Quick Sort
+
+O **Quick Sort** também usa dividir para conquistar, mas de um jeito
+diferente do Merge Sort: em vez de dividir sempre ao meio, ele escolhe
+um **pivô** e **particiona** o array ao redor dele, de forma que tudo
+menor que o pivô fique à esquerda, e tudo maior fique à direita.
+
+## Particionamento (esquema de Lomuto)
+
+```
+particionar(array, baixo, alto):
+    pivô = array[alto]           // escolhe o último elemento como pivô
+    i = baixo - 1
+    para j de baixo até alto-1:
+        se array[j] <= pivô:
+            i++
+            troque array[i] e array[j]
+    troque array[i+1] e array[alto]
+    retorne i+1                  // posição final do pivô
+```
+
+Depois de particionar, o pivô já está na sua **posição final definitiva**
+no array ordenado — nunca mais precisa se mover.
+
+## Quick Sort completo
+
+```
+quickSort(array, baixo, alto):
+    se baixo < alto:
+        p = particionar(array, baixo, alto)
+        quickSort(array, baixo, p-1)
+        quickSort(array, p+1, alto)
+```
+
+## Complexidade
+
+- **Caso médio**: O(n log n), na prática um dos algoritmos mais rápidos
+  que existem para ordenação por comparação.
+- **Pior caso**: O(n²), quando o pivô escolhido é sempre o menor ou
+  maior elemento (ex: array já ordenado com essa estratégia simples de
+  pivô). Estratégias melhores de escolha de pivô (mediana de três,
+  aleatório) reduzem bastante essa chance.
+
+## Quick Sort vs. Merge Sort
+
+| | Quick Sort | Merge Sort |
+|---|---|---|
+| Caso médio | O(n log n) | O(n log n) |
+| Pior caso | O(n²) | O(n log n) |
+| Espaço extra | O(log n) (pilha de recursão) | O(n) |
+| Estável? | Não | Sim |
+
+Na prática, o Quick Sort costuma ser mais rápido por ter melhor
+localidade de cache e não precisar de array auxiliar, apesar do pior
+caso teoricamente pior.
+
+## Experimente
+
+Rode a ordenação e observe o pivô (vermelho) sendo escolhido a cada
+chamada, os elementos sendo comparados e trocados ao redor dele, até
+encontrar sua posição final (verde).

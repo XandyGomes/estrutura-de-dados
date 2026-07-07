@@ -7,6 +7,7 @@ export const topicos: TopicDef[] = [
     descricao: "Como medir e comparar a eficiência de algoritmos.",
     fase: 1,
     status: "disponivel",
+    pdf: "/pdfs/big-o.pdf",
   },
   {
     slug: "arrays",
@@ -21,6 +22,7 @@ export const topicos: TopicDef[] = [
     descricao: "Percorrendo o array elemento a elemento.",
     fase: 1,
     status: "disponivel",
+    pdf: "/pdfs/busca-sequencial.pdf",
   },
   {
     slug: "busca-binaria",
@@ -28,6 +30,55 @@ export const topicos: TopicDef[] = [
     descricao: "Dividindo o problema ao meio a cada passo.",
     fase: 1,
     status: "disponivel",
+    pdf: "/pdfs/busca-binaria.pdf",
+  },
+  {
+    slug: "bubble-sort",
+    titulo: "Bubble Sort",
+    descricao: "Ordenação por trocas sucessivas de elementos adjacentes.",
+    fase: 1,
+    status: "disponivel",
+    pdf: "/pdfs/bubble-sort.pdf",
+  },
+  {
+    slug: "selection-sort",
+    titulo: "Selection Sort",
+    descricao: "Ordenação selecionando o menor elemento a cada passo.",
+    fase: 1,
+    status: "disponivel",
+    pdf: "/pdfs/selection-sort.pdf",
+  },
+  {
+    slug: "recursividade",
+    titulo: "Recursividade",
+    descricao: "Funções que chamam a si mesmas, e a pilha de execução por trás.",
+    fase: 1,
+    status: "disponivel",
+    pdf: "/pdfs/recursividade.pdf",
+  },
+  {
+    slug: "merge-sort",
+    titulo: "Merge Sort",
+    descricao: "Dividir, ordenar as metades e intercalar.",
+    fase: 1,
+    status: "disponivel",
+    pdf: "/pdfs/merge-sort.pdf",
+  },
+  {
+    slug: "quick-sort",
+    titulo: "Quick Sort",
+    descricao: "Particionamento em torno de um pivô.",
+    fase: 1,
+    status: "disponivel",
+    pdf: "/pdfs/quick-sort.pdf",
+  },
+  {
+    slug: "matriz-esparsa",
+    titulo: "Matriz Esparsa",
+    descricao: "Representando matrizes com poucos valores preenchidos sem desperdiçar memória.",
+    fase: 1,
+    status: "disponivel",
+    pdf: "/pdfs/matriz-esparsa.pdf",
   },
   {
     slug: "pilhas",
@@ -35,6 +86,7 @@ export const topicos: TopicDef[] = [
     descricao: "Last In, First Out: push, pop e peek.",
     fase: 1,
     status: "disponivel",
+    pdf: "/pdfs/pilhas.pdf",
   },
   {
     slug: "filas",
@@ -42,6 +94,7 @@ export const topicos: TopicDef[] = [
     descricao: "First In, First Out: enqueue e dequeue.",
     fase: 1,
     status: "disponivel",
+    pdf: "/pdfs/filas.pdf",
   },
   {
     slug: "deque",
@@ -49,6 +102,7 @@ export const topicos: TopicDef[] = [
     descricao: "Inserção e remoção nas duas extremidades.",
     fase: 1,
     status: "disponivel",
+    pdf: "/pdfs/deque.pdf",
   },
   {
     slug: "listas-ligadas",
@@ -56,6 +110,7 @@ export const topicos: TopicDef[] = [
     descricao: "Nós conectados por ponteiros: inserir, remover, buscar.",
     fase: 2,
     status: "disponivel",
+    pdf: "/pdfs/listas-ligadas.pdf",
   },
   {
     slug: "listas-duplamente-encadeadas",
@@ -63,6 +118,7 @@ export const topicos: TopicDef[] = [
     descricao: "Ponteiros para os dois vizinhos: anterior e próximo.",
     fase: 2,
     status: "disponivel",
+    pdf: "/pdfs/listas-duplamente-encadeadas.pdf",
   },
   {
     slug: "arvores-binarias",
@@ -70,6 +126,7 @@ export const topicos: TopicDef[] = [
     descricao: "Inserção, remoção, busca e percursos em árvores.",
     fase: 3,
     status: "disponivel",
+    pdf: "/pdfs/arvores-binarias.pdf",
   },
   {
     slug: "heaps",
@@ -95,9 +152,10 @@ export const topicos: TopicDef[] = [
   {
     slug: "grafos",
     titulo: "Grafos, BFS, DFS e Dijkstra",
-    descricao: "Representação, travessias e caminho mínimo.",
+    descricao: "Representação, travessias, caminho mínimo, história e aplicações reais.",
     fase: 5,
     status: "disponivel",
+    pdf: "/pdfs/grafos.pdf",
   },
 ];
 

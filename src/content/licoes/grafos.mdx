@@ -56,15 +56,73 @@ A ideia central:
 4. Continue até processar todos os nós alcançáveis.
 
 Dijkstra usa uma **fila de prioridade** (geralmente implementada com um
-[[heaps|heap]]) para sempre escolher rapidamente o nó de menor distância.
+[heap](/estrutura/heaps)) para sempre escolher rapidamente o nó de menor
+distância.
 
 ## Complexidade
 
 - BFS e DFS: O(V + E), onde V é o número de vértices e E o número de arestas.
 - Dijkstra (com fila de prioridade baseada em heap): O((V + E) log V).
 
+## Um pouco de história: as Pontes de Königsberg
+
+A teoria dos grafos nasceu em 1736, quando o matemático **Leonhard
+Euler** resolveu um problema popular na cidade de Königsberg (hoje
+Kaliningrad): a cidade tinha 7 pontes conectando 4 áreas de terra, e os
+moradores queriam saber se era possível fazer um passeio atravessando
+**cada ponte exatamente uma vez**, voltando ao ponto de partida.
+
+Euler representou cada área de terra como um nó e cada ponte como uma
+aresta, e provou que isso era **impossível**: um passeio desses (hoje
+chamado de "circuito euleriano") só existe se **todo nó tiver um número
+par de arestas**. Em Königsberg, todas as 4 áreas tinham um número ímpar
+de pontes. Essa foi a primeira vez que um problema foi resolvido
+representando-o como um grafo — o nascimento formal da área.
+
+## Famílias notáveis de grafos
+
+Alguns grafos têm estrutura tão regular e interessante que ganharam
+nome próprio:
+
+- **Grafo de Petersen**: 10 nós, 15 arestas, extremamente simétrico.
+  Serve como contraexemplo clássico para várias conjecturas em teoria
+  dos grafos (é o grafo "pequeno" que quebra várias propriedades que
+  pareceriam óbvias).
+- **Hipercubos**: o hipercubo de dimensão *k* tem 2^k nós (um para cada
+  sequência binária de tamanho k), conectando nós cujas sequências
+  diferem em exatamente 1 bit. É a base de topologias de rede usadas em
+  supercomputadores.
+- **Grafos bipartidos**: os nós podem ser divididos em dois grupos, onde
+  toda aresta conecta um nó de um grupo a um nó do outro (nunca dois nós
+  do mesmo grupo). Exemplo clássico: "quem gosta de quê" (pessoas de um
+  lado, produtos do outro).
+
+## Aplicações no mundo real
+
+Grafos estão em praticamente todo sistema que envolve **conexões**:
+
+- **GPS e mapas (Waze, Google Maps)**: cruzamentos são nós, ruas são
+  arestas com peso (distância ou tempo). Encontrar a melhor rota é
+  literalmente rodar um algoritmo de caminho mínimo como o Dijkstra.
+- **Redes sociais**: pessoas são nós, conexões (amizade, seguir) são
+  arestas. Sugestões de "pessoas que você talvez conheça" usam BFS/DFS
+  para explorar conexões de segundo e terceiro grau.
+- **Sudoku como coloração de grafos**: cada célula é um nó, conectada a
+  todas as outras células da mesma linha, coluna e quadrante. Resolver o
+  Sudoku equivale a colorir o grafo com 9 cores sem que nós conectados
+  tenham a mesma cor.
+- **Logística e o Problema do Caixeiro Viajante**: entregar pacotes na
+  rota mais curta que passa por todos os destinos é um problema de
+  grafos notoriamente difícil (NP-difícil), central em logística e
+  roteamento de veículos.
+- **Roteamento de internet**: roteadores são nós, conexões de rede são
+  arestas; protocolos de roteamento usam variações de algoritmos de
+  caminho mínimo para decidir por onde os pacotes de dados devem passar.
+
 ## Experimente
 
 Rode BFS e DFS a partir do mesmo nó e compare a ordem de visita. Depois
 rode Dijkstra e observe a narração mostrando as distâncias sendo
 atualizadas (relaxamento de arestas) até chegar ao resultado final.
+Use as operações de **sandbox** para adicionar seus próprios nós e
+arestas e criar um grafo diferente do exemplo.

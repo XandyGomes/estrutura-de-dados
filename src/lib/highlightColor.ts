@@ -16,3 +16,7 @@ export function colorForHighlight(
   if (!found) return undefined;
   return COLOR_VARS[found.color ?? "visit"];
 }
+
+export function hl(id: string, color: NonNullable<Highlight["color"]>): Highlight {
+  return { id, color };
+}

@@ -1,0 +1,52 @@
+# Recursividade
+
+Uma função **recursiva** é uma função que chama a si mesma para resolver
+uma versão menor do mesmo problema, até chegar a um **caso base** simples
+o suficiente para responder diretamente.
+
+## As duas partes de toda recursão
+
+```
+função fatorial(n):
+    se n == 0:                    // caso base
+        retorne 1
+    senão:                        // caso recursivo
+        retorne n * fatorial(n - 1)
+```
+
+- **Caso base**: a condição de parada. Sem ela, a função chamaria a si
+  mesma para sempre (estouro de pilha).
+- **Caso recursivo**: reduz o problema (aqui, `n` vira `n - 1`) e delega
+  o resto para uma nova chamada da própria função.
+
+## A pilha de chamadas
+
+Toda vez que uma função chama outra (ou a si mesma), o programa
+**empilha** um novo quadro (stack frame) guardando os parâmetros e o
+ponto de retorno daquela chamada. É literalmente uma [[pilhas|pilha]]:
+Last In, First Out.
+
+Para calcular `fatorial(3)`:
+
+1. `fatorial(3)` chama `fatorial(2)`, mas não pode terminar antes dela.
+2. `fatorial(2)` chama `fatorial(1)`.
+3. `fatorial(1)` chama `fatorial(0)`.
+4. `fatorial(0)` é o caso base: retorna `1` imediatamente.
+5. Agora a pilha **desempilha** de cima para baixo: `fatorial(1) = 1×1`,
+   `fatorial(2) = 2×1`, `fatorial(3) = 3×2`, resultado final `6`.
+
+## Por que isso importa na prática
+
+- Cada quadro na pilha usa memória. Recursão muito profunda (milhares de
+  chamadas) pode causar **estouro de pilha** (stack overflow).
+- Vários algoritmos importantes são naturalmente recursivos: DFS em
+  grafos/árvores, Merge Sort, Quick Sort, e a própria definição
+  matemática de estruturas como árvores (uma árvore é um nó com
+  subárvores, que também são árvores).
+
+## Experimente
+
+Escolha um valor de `n` e observe a pilha crescer (empilhando uma
+chamada por vez) até o caso base, e depois encolher enquanto cada
+chamada calcula seu resultado usando o valor devolvido pela chamada
+seguinte.

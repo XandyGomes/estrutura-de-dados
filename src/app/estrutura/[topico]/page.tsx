@@ -37,7 +37,27 @@ export default async function TopicoPage({
         Estrutura de Dados
       </p>
       <h1 className="mb-2 text-3xl font-semibold tracking-tight">{topico.titulo}</h1>
-      <p className="mb-8 text-[var(--color-muted)]">{topico.descricao}</p>
+      <p className="mb-4 text-[var(--color-muted)]">{topico.descricao}</p>
+
+      <div className="mb-8 flex flex-wrap gap-2">
+        {topico.pdf && (
+          <a
+            href={topico.pdf}
+            download
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--color-border)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-foreground)]"
+          >
+            📄 Baixar PDF da aula
+          </a>
+        )}
+        <a
+          href="https://github.com/XandyGomes"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--color-border)] px-3 py-1.5 text-xs font-medium text-[var(--color-muted)] transition-colors hover:border-[var(--color-primary)] hover:text-[var(--color-foreground)]"
+        >
+          💻 Ver código no GitHub
+        </a>
+      </div>
 
       <TopicTabs
         licao={<Licao />}

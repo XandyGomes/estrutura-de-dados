@@ -1,0 +1,45 @@
+# Bubble Sort
+
+O **Bubble Sort** (ordenação por bolha) é um dos algoritmos de ordenação
+mais simples de entender: percorremos o array repetidamente, comparando
+**pares de elementos adjacentes** e trocando-os de lugar se estiverem
+fora de ordem.
+
+## Por que "bolha"?
+
+A cada passada completa, o **maior valor não ordenado "borbulha"** até o
+final do array, como uma bolha subindo na água. Depois de uma passada,
+podemos ter certeza de que o último elemento já está na posição final.
+
+## Algoritmo
+
+```
+para i de 0 até n-2:
+    trocou = falso
+    para j de 0 até n-2-i:
+        se array[j] > array[j+1]:
+            troque array[j] e array[j+1]
+            trocou = verdadeiro
+    se não trocou: pare (já está ordenado)
+```
+
+A otimização "se não trocou, pare" é importante: se uma passada inteira
+não fizer nenhuma troca, o array já está ordenado, e podemos parar mais
+cedo.
+
+## Complexidade
+
+- **Pior caso e caso médio**: O(n²) — dois laços aninhados percorrendo
+  quase todo o array.
+- **Melhor caso**: O(n), quando o array já está ordenado (graças à
+  otimização de parada antecipada).
+
+Por causa do O(n²), Bubble Sort não é usado em produção para arrays
+grandes, mas é ótimo para **aprender o conceito** de ordenação por
+comparação e troca.
+
+## Experimente
+
+Rode a ordenação e observe: cada passada completa "acomoda" um valor a
+mais na parte final do array (destacada em verde), até tudo ficar
+ordenado.

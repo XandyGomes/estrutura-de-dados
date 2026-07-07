@@ -71,4 +71,5 @@ export type TopicDef = {
   descricao: string;
   fase: TopicPhase;
   status: TopicStatus;
+  pdf?: string;
 };

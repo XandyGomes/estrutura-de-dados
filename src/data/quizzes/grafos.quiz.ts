@@ -44,4 +44,40 @@ export const quiz: QuizQuestion[] = [
     correta: 1,
     explicacao: "BFS conta apenas o número de arestas (assume peso 1 para todas); Dijkstra considera o peso real de cada aresta, podendo preferir um caminho com mais arestas, mas de menor custo total.",
   },
+  {
+    id: "q5",
+    enunciado: "O problema das Pontes de Königsberg, resolvido por Euler em 1736, perguntava:",
+    opcoes: [
+      "Qual a menor distância entre duas pontes",
+      "Se era possível atravessar cada uma das 7 pontes exatamente uma vez, voltando ao ponto de partida",
+      "Quantas pontes seriam necessárias para conectar a cidade",
+      "Qual o peso máximo que cada ponte suportava",
+    ],
+    correta: 1,
+    explicacao: "Euler provou que isso só é possível se todo nó do grafo tiver um número par de arestas — em Königsberg, todas as 4 áreas tinham número ímpar de pontes, então era impossível.",
+  },
+  {
+    id: "q6",
+    enunciado: "O que caracteriza um grafo bipartido?",
+    opcoes: [
+      "Ele tem exatamente dois nós",
+      "Os nós podem ser divididos em dois grupos, e toda aresta conecta um nó de um grupo a um nó do outro",
+      "Ele sempre tem peso nas arestas",
+      "Ele nunca tem ciclos",
+    ],
+    correta: 1,
+    explicacao: "Nenhuma aresta conecta dois nós do mesmo grupo — um exemplo clássico é 'pessoas' de um lado e 'produtos que elas compraram' do outro.",
+  },
+  {
+    id: "q7",
+    enunciado: "Resolver um Sudoku pode ser modelado como qual problema de grafos?",
+    opcoes: [
+      "Caminho mínimo (Dijkstra)",
+      "Coloração de grafos: cada célula é um nó, e células na mesma linha/coluna/quadrante não podem ter a mesma 'cor' (número)",
+      "Árvore geradora mínima",
+      "Detecção de ciclos",
+    ],
+    correta: 1,
+    explicacao: "Cada célula vira um nó conectado às demais da mesma linha, coluna e quadrante; preencher os números é como colorir o grafo sem que nós vizinhos tenham a mesma cor.",
+  },
 ];

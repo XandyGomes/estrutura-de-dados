@@ -54,6 +54,85 @@ export function neighborsOf(state: GraphState, nodeId: string): { id: string; we
   return result.sort((a, b) => a.id.localeCompare(b.id));
 }
 
+function circularLayout(nodeIds: string[], width = 440, height = 300): Record<string, { x: number; y: number }> {
+  const cx = width / 2;
+  const cy = height / 2;
+  const r = Math.min(width, height) / 2 - 40;
+  const positions: Record<string, { x: number; y: number }> = {};
+  nodeIds.forEach((id, i) => {
+    const angle = (2 * Math.PI * i) / nodeIds.length - Math.PI / 2;
+    positions[id] = { x: Math.round(cx + r * Math.cos(angle)), y: Math.round(cy + r * Math.sin(angle)) };
+  });
+  return positions;
+}
+
+export function graphAddNode(state: GraphState, labelRaw: string): OperationResult<GraphState> {
+  const label = labelRaw.trim().toUpperCase();
+  if (!label || label.length > 2) {
+    return { ok: false, error: "Informe um nome curto para o nó (ex: G)." };
+  }
+  if (state.nodes.some((n) => n.id === label)) {
+    return { ok: false, error: `Já existe um nó chamado "${label}".` };
+  }
+
+  const nodeIds = [...state.nodes.map((n) => n.id), label];
+  const positions = circularLayout(nodeIds);
+  const nodes = nodeIds.map((id) => ({ id, x: positions[id].x, y: positions[id].y }));
+  const nextState: GraphState = { nodes, edges: state.edges };
+
+  const frames: FrameSequence<GraphState> = [
+    { id: 0, state, narration: `Adicionando o nó ${label}...` },
+    {
+      id: 1,
+      state: nextState,
+      highlights: [hl(label, "new")],
+      pointers: { atual: label },
+      narration: `Nó ${label} adicionado. O grafo agora tem ${nodes.length} nós.`,
+    },
+  ];
+  return { ok: true, frames, nextState };
+}
+
+export function graphAddEdge(
+  state: GraphState,
+  fromRaw: string,
+  toRaw: string,
+  weightRaw: string
+): OperationResult<GraphState> {
+  const from = fromRaw.trim().toUpperCase();
+  const to = toRaw.trim().toUpperCase();
+  const weight = Number(weightRaw);
+
+  if (!state.nodes.some((n) => n.id === from)) return { ok: false, error: `Nó "${from}" não existe.` };
+  if (!state.nodes.some((n) => n.id === to)) return { ok: false, error: `Nó "${to}" não existe.` };
+  if (from === to) return { ok: false, error: "Uma aresta precisa conectar dois nós diferentes." };
+  if (!Number.isFinite(weight) || weight <= 0) {
+    return { ok: false, error: "Informe um peso numérico positivo para a aresta." };
+  }
+  if (state.edges.some((e) => (e.fromId === from && e.toId === to) || (e.fromId === to && e.toId === from))) {
+    return { ok: false, error: `Já existe uma aresta entre ${from} e ${to}.` };
+  }
+
+  const newEdge: GraphEdge = { id: `${from}-${to}-${Date.now()}`, fromId: from, toId: to, weight };
+  const nextState: GraphState = { nodes: state.nodes, edges: [...state.edges, newEdge] };
+
+  const frames: FrameSequence<GraphState> = [
+    {
+      id: 0,
+      state,
+      highlights: [hl(from, "new"), hl(to, "new")],
+      narration: `Conectando ${from} e ${to} com peso ${weight}...`,
+    },
+    {
+      id: 1,
+      state: nextState,
+      highlights: [hl(from, "new"), hl(to, "new")],
+      narration: `Aresta ${from}-${to} (peso ${weight}) adicionada.`,
+    },
+  ];
+  return { ok: true, frames, nextState };
+}
+
 function validateStart(state: GraphState, startId: string): string | null {
   if (!state.nodes.some((n) => n.id === startId)) {
     return `Nó "${startId}" não existe. Use uma letra de A a F.`;

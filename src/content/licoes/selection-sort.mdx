@@ -1,0 +1,42 @@
+# Selection Sort
+
+O **Selection Sort** (ordenação por seleção) ordena o array **selecionando
+repetidamente o menor elemento restante** e colocando-o na posição
+correta.
+
+## Algoritmo
+
+```
+para i de 0 até n-2:
+    minIdx = i
+    para j de i+1 até n-1:
+        se array[j] < array[minIdx]:
+            minIdx = j
+    troque array[i] e array[minIdx]
+```
+
+Em cada iteração de `i`, percorremos o restante do array (`i` até o
+final) procurando o menor valor, e o trocamos para a posição `i`. Depois
+disso, a posição `i` nunca mais muda: já está definitivamente ordenada.
+
+## Diferença para o Bubble Sort
+
+Ambos são O(n²), mas o Selection Sort faz **muito menos trocas**: no
+máximo uma troca por posição (n-1 trocas no total), enquanto o Bubble
+Sort pode fazer várias trocas a cada passada. Isso importa quando trocar
+elementos é uma operação cara (ex: strings grandes, registros complexos).
+
+Por outro lado, o Selection Sort **sempre** faz o mesmo número de
+comparações, mesmo que o array já esteja ordenado — ele não tem uma
+otimização de parada antecipada como o Bubble Sort.
+
+## Complexidade
+
+- **Todos os casos** (melhor, médio, pior): O(n²) em comparações.
+- **Trocas**: O(n) no total, no máximo uma por posição.
+
+## Experimente
+
+Observe o ponteiro de "menor atual" (azul) se movendo enquanto o
+algoritmo procura o menor valor da parte não ordenada, e a troca (roxo)
+acontecendo só uma vez por posição.

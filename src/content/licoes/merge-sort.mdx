@@ -1,0 +1,46 @@
+# Merge Sort
+
+O **Merge Sort** é um algoritmo de ordenação que usa a estratégia
+**dividir para conquistar**: divide o array em metades menores até
+sobrar um elemento (já ordenado por definição), depois **intercala**
+(merge) essas metades de volta, mantendo a ordem.
+
+## As duas fases
+
+1. **Dividir**: quebra o array recursivamente ao meio até sobrar
+   sub-arrays de um elemento.
+2. **Conquistar (intercalar)**: combina pares de sub-arrays já
+   ordenados em um único sub-array ordenado, comparando os menores
+   elementos de cada lado a cada passo.
+
+```
+mergeSort(array, esquerda, direita):
+    se esquerda >= direita: retorne (1 elemento já está ordenado)
+    meio = (esquerda + direita) / 2
+    mergeSort(array, esquerda, meio)
+    mergeSort(array, meio+1, direita)
+    intercale(array, esquerda, meio, direita)
+```
+
+## Como funciona o merge
+
+Para intercalar duas metades já ordenadas, comparamos os primeiros
+elementos de cada uma e colocamos o menor no resultado, avançando o
+ponteiro daquele lado. Repetimos até uma das metades acabar, e então
+copiamos o restante da outra.
+
+## Complexidade
+
+- **Todos os casos**: O(n log n) — são log n níveis de divisão, e cada
+  nível faz O(n) trabalho de intercalação.
+- **Espaço**: O(n) extra, pois o merge precisa de espaço auxiliar para
+  montar o resultado combinado.
+
+O(n log n) garantido em **todos os casos** é a grande vantagem do Merge
+Sort sobre Bubble Sort e Selection Sort (ambos O(n²)).
+
+## Experimente
+
+Rode a ordenação e observe as duas fases: primeiro a divisão em
+sub-arrays cada vez menores, depois a intercalação reconstruindo o array
+ordenado de baixo para cima.

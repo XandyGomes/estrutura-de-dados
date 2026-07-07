@@ -13,10 +13,18 @@ export function Header() {
             <span className="text-[var(--color-primary)]">.</span>
           </span>
         </Link>
-        <nav className="flex gap-5 text-sm text-[var(--color-muted)]">
+        <nav className="flex items-center gap-5 text-sm text-[var(--color-muted)]">
           <Link href="/" className="transition-colors hover:text-[var(--color-foreground)]">
             Tópicos
           </Link>
+          <a
+            href="https://github.com/XandyGomes"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-[var(--color-foreground)]"
+          >
+            GitHub
+          </a>
         </nav>
       </div>
     </header>
