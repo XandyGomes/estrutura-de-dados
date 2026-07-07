@@ -1,0 +1,70 @@
+# Grafos, BFS, DFS e Dijkstra
+
+Um **grafo** é um conjunto de **nós** (ou vértices) conectados por
+**arestas**. Diferente de árvores, um grafo não tem uma raiz fixa nem
+proibição de ciclos: qualquer nó pode se conectar a qualquer outro.
+
+## Representação
+
+As duas formas mais comuns de representar um grafo no código:
+
+- **Lista de adjacência**: para cada nó, guardamos a lista de seus
+  vizinhos. Eficiente em espaço para grafos esparsos (poucas arestas),
+  e é a representação que usamos internamente nesta página.
+- **Matriz de adjacência**: uma matriz n×n onde `matriz[i][j] = 1` (ou o
+  peso da aresta) indica uma conexão entre os nós i e j. Simples, mas
+  gasta O(n²) de memória mesmo com poucas arestas.
+
+Grafos podem ser **direcionados** (a aresta só vale em um sentido, como
+"segue" no Instagram) ou **não-direcionados** (a conexão vale nos dois
+sentidos, como "é amigo de" no Facebook). O grafo desta página é
+não-direcionado e com pesos nas arestas.
+
+## Busca em Largura (BFS)
+
+O BFS explora o grafo **camada por camada**: primeiro todos os vizinhos
+diretos do nó inicial, depois os vizinhos dos vizinhos, e assim por
+diante. Usa uma **fila** (FIFO): cada nó visitado tem seus vizinhos não
+visitados adicionados ao final da fila.
+
+BFS é ideal para encontrar o **caminho com menos arestas** entre dois
+nós (em grafos sem peso).
+
+## Busca em Profundidade (DFS)
+
+O DFS explora o mais fundo possível por um caminho antes de voltar
+("backtrack") e tentar outro. Usa uma **pilha** (LIFO) — aqui,
+implementada via recursão, que é essencialmente uma pilha de chamadas.
+
+DFS é útil para detectar ciclos, ordenação topológica, e explorar toda a
+estrutura de forma mais "gulosa".
+
+## Algoritmo de Dijkstra
+
+Quando as arestas têm **pesos** (custos), nem sempre o caminho com menos
+arestas é o mais barato. O algoritmo de Dijkstra encontra o **caminho de
+menor custo total** a partir de um nó inicial até todos os outros.
+
+A ideia central:
+
+1. Comece com distância 0 para o nó inicial, e infinito para os demais.
+2. Repita: escolha o nó **não processado** com a **menor distância
+   conhecida**, marque-o como processado.
+3. Para cada vizinho desse nó, calcule se passar por ele oferece um
+   caminho mais curto (**relaxamento de aresta**). Se sim, atualize a
+   distância do vizinho.
+4. Continue até processar todos os nós alcançáveis.
+
+Dijkstra usa uma **fila de prioridade** (geralmente implementada com um
+[[heaps|heap]]) para sempre escolher rapidamente o nó de menor distância.
+
+## Complexidade
+
+- BFS e DFS: O(V + E), onde V é o número de vértices e E o número de arestas.
+- Dijkstra (com fila de prioridade baseada em heap): O((V + E) log V).
+
+## Experimente
+
+Rode BFS e DFS a partir do mesmo nó e compare a ordem de visita. Depois
+rode Dijkstra e observe a narração mostrando as distâncias sendo
+atualizadas (relaxamento de arestas) até chegar ao resultado final.

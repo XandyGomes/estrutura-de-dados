@@ -97,7 +97,7 @@ export const topicos: TopicDef[] = [
     titulo: "Grafos, BFS, DFS e Dijkstra",
     descricao: "Representação, travessias e caminho mínimo.",
     fase: 5,
-    status: "em-breve",
+    status: "disponivel",
   },
 ];
 

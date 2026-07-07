@@ -43,12 +43,14 @@ export default function Home() {
             </div>
             <div className="text-[var(--color-muted)]">tópicos prontos</div>
           </div>
-          <div>
-            <div className="text-2xl font-semibold text-[var(--color-foreground)]">
-              {emBreve.length}
+          {emBreve.length > 0 && (
+            <div>
+              <div className="text-2xl font-semibold text-[var(--color-foreground)]">
+                {emBreve.length}
+              </div>
+              <div className="text-[var(--color-muted)]">no roadmap</div>
             </div>
-            <div className="text-[var(--color-muted)]">no roadmap</div>
-          </div>
+          )}
         </div>
       </section>
 
@@ -76,6 +78,7 @@ export default function Home() {
         </div>
       </section>
 
+      {emBreve.length > 0 && (
       <section>
         <h2 className="mb-5 text-sm font-medium uppercase tracking-wider text-[var(--color-muted)]">
           Roadmap
@@ -104,6 +107,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      )}
     </div>
   );
 }
