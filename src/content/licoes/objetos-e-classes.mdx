@@ -9,15 +9,15 @@ respeitar.
 
 ## O problema do objeto livre
 
-Em JavaScript, é possível criar qualquer objeto, sem nenhuma garantia sobre
-o que ele contém:
+Se nada obriga um objeto a seguir uma estrutura fixa, é possível criar um
+objeto com dados que não fazem sentido nenhum, um "objeto" com base e
+altura sendo texto, por exemplo, em vez de número:
 
-```js
-let forma = {
-  base: 'batata',
-  altura: 'cebola',
-  tipo: 'Z'
-}
+```
+forma = objeto com:
+    base = "batata"
+    altura = "cebola"
+    tipo = "Z"
 ```
 
 Nada impede isso. Uma função que espera calcular a área dessa forma só vai
@@ -31,47 +31,42 @@ que regras esses atributos precisam seguir para o objeto ser válido. A
 analogia clássica é a forma de assar (a assadeira): não importa a receita,
 tudo que sai dela tem o mesmo formato.
 
-```js
-class FormaGeometrica {
-  #base
-  #altura
-  #tipo
+```
+classe FormaGeometrica:
+    atributo privado base
+    atributo privado altura
+    atributo privado tipo
 
-  constructor(base, altura, tipo) {
-    this.base = base     // chama o setter, que valida
-    this.altura = altura
-    this.tipo = tipo
-  }
+    construtor(base, altura, tipo):
+        definirBase(base)         // passa pelo setter, que valida
+        definirAltura(altura)
+        definirTipo(tipo)
 
-  set base(valor) {
-    if (typeof valor !== 'number' || valor <= 0) {
-      throw new Error('ERRO: a base precisa ser numérica e maior que zero.')
-    }
-    this.#base = valor
-  }
+    metodo definirBase(valor):
+        se valor não é número ou valor <= 0:
+            erro "a base precisa ser numérica e maior que zero"
+        base = valor
 
-  get base() { return this.#base }
+    metodo obterBase():
+        retorne base
 
-  get area() {
-    switch (this.tipo) {
-      case 'R': return this.base * this.altura
-      case 'T': return this.base * this.altura / 2
-      case 'E': return (this.base / 2) * (this.altura / 2) * Math.PI
-    }
-  }
-}
+    metodo calcularArea():
+        se tipo == "retangulo": retorne base * altura
+        se tipo == "triangulo": retorne base * altura / 2
+        se tipo == "elipse": retorne (base / 2) * (altura / 2) * PI
 ```
 
 ## Encapsulamento, atributos e propriedades
 
-- **Atributo privado** (`#base`): só pode ser lido ou alterado de dentro da
-  própria classe. Em JavaScript, o nome começa com `#`.
+- **Atributo privado**: só pode ser lido ou alterado de dentro da própria
+  classe, nunca diretamente de fora.
 - **Getter**: um método que expõe o valor de um atributo privado para fora
   da classe, sem permitir alterá-lo diretamente.
 - **Setter**: um método que permite alterar um atributo privado **passando
   por uma validação** antes de aceitar o novo valor.
-- **Propriedade**: o nome pelo qual getter e setter são acessados de fora,
-  como se fossem um atributo comum (`forma.base`, sem parênteses).
+- **Propriedade**: o conjunto formado por um atributo privado mais o seu
+  getter e setter, a forma "segura" de acessar aquele dado de fora da
+  classe.
 
 Esse conjunto (atributos privados + getters/setters que validam) é o que
 chamamos de **encapsulamento**: os dados internos do objeto ficam

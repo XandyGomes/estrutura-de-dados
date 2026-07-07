@@ -18,7 +18,7 @@ export function Header() {
             Tópicos
           </Link>
           <Link href="/programa" className="transition-colors hover:text-[var(--color-foreground)]">
-            Programa
+            Conteúdo Programático
           </Link>
           <a
             href="https://github.com/XandyGomes"

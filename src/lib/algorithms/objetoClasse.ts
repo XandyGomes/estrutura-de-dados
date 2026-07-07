@@ -65,20 +65,20 @@ export function criarObjetoLivre(
     {
       id: 0,
       state: { ...nextState, checks, area: null, erro: null },
-      narration: `Criando um objeto comum "{ base: ${baseRaw}, altura: ${alturaRaw}, tipo: ${tipo} }", sem nenhuma classe por trás. Nada garante que esses valores fazem sentido.`,
+      narration: `Criando um objeto comum, com base = ${baseRaw}, altura = ${alturaRaw}, tipo = ${tipo}, sem nenhuma classe por trás. Nada garante que esses valores fazem sentido.`,
     },
   ];
 
   const area = calcArea(base, altura, tipo);
-  const final: ObjetoState = { ...nextState, area, erro: area === null ? `calcArea() não reconhece o tipo "${tipo}" e retorna null.` : null };
+  const final: ObjetoState = { ...nextState, area, erro: area === null ? `calcularArea() não reconhece o tipo "${tipo}" e retorna nulo.` : null };
   frames.push({
     id: 1,
     state: final,
     highlights: checks.map((c) => hl(c.id, area === null ? "danger" : "new")),
     narration:
       area === null
-        ? `O objeto foi criado sem nenhum problema (JavaScript não impede isso!), mas calcArea() não sabe o que fazer com tipo "${tipo}" e retorna null. O erro só aparece depois, longe de onde o objeto foi criado.`
-        : `O objeto foi criado e calcArea() devolveu ${area.toFixed(2)}. Funcionou desta vez, mas nada no código impede alguém de passar base negativa, ou um tipo inválido, e só descobrir o problema muito depois.`,
+        ? `O objeto foi criado sem nenhum problema (nada impede isso sem uma classe validando), mas calcularArea() não sabe o que fazer com tipo "${tipo}" e retorna nulo. O erro só aparece depois, longe de onde o objeto foi criado.`
+        : `O objeto foi criado e calcularArea() devolveu ${area.toFixed(2)}. Funcionou desta vez, mas nada no código impede alguém de passar base negativa, ou um tipo inválido, e só descobrir o problema muito depois.`,
   });
 
   return { ok: true, frames, nextState: final };
@@ -124,7 +124,7 @@ export function criarComClasse(
     id: frames.length,
     state: baseState,
     highlights: [hl(checkBase.id, "success")],
-    narration: `set base(${baseRaw}): numérico e positivo, aceito.`,
+    narration: `Validando base (${baseRaw}): numérico e positivo, aceito.`,
   });
 
   if (!Number.isFinite(altura) || altura <= 0) {
@@ -142,7 +142,7 @@ export function criarComClasse(
     id: frames.length,
     state: baseState,
     highlights: [hl(checkBase.id, "success"), hl(checkAltura.id, "success")],
-    narration: `set altura(${alturaRaw}): numérico e positivo, aceito.`,
+    narration: `Validando altura (${alturaRaw}): numérico e positivo, aceito.`,
   });
 
   if (!["R", "T", "E"].includes(tipo)) {
@@ -160,7 +160,7 @@ export function criarComClasse(
     id: frames.length,
     state: baseState,
     highlights: [hl(checkBase.id, "success"), hl(checkAltura.id, "success"), hl(checkTipo.id, "success")],
-    narration: `set tipo("${tipo}"): valor reconhecido, aceito.`,
+    narration: `Validando tipo ("${tipo}"): valor reconhecido, aceito.`,
   });
 
   const area = calcArea(base, altura, tipo) as number;
