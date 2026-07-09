@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 import createMDX from "@next/mdx";
 
-const basePath = process.env.GITHUB_ACTIONS ? "/estrutura-de-dados" : "";
+const basePath = process.env.GITHUB_ACTIONS ? "/ed" : "";
 
 const nextConfig: NextConfig = {
   output: "export",
